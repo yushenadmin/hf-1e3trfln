@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PulseWave Festival</title>
+  <meta name="description" content="PulseWave Festival official website featuring lineup, schedule highlights, ticket information, and festival experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#0f1021;
+      --bg-soft:#171936;
+      --card:#1d2045cc;
+      --text:#f6f3ff;
+      --muted:#c8c3e0;
+      --primary:#ff4fd8;
+      --secondary:#7c5cff;
+      --accent:#00d1ff;
+      --gold:#ffb84d;
+      --border:rgba(255,255,255,.12);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:22px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255,79,216,.18), transparent 30%),
+        radial-gradient(circle at 85% 15%, rgba(0,209,255,.14), transparent 28%),
+        radial-gradient(circle at 50% 80%, rgba(124,92,255,.18), transparent 30%),
+        linear-gradient(135deg, #0b0c1b 0%, #12142c 45%, #0f1021 100%);
+      overflow-x:hidden;
+    }
+
+    body.menu-open{overflow:hidden}
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--max), calc(100% - 2rem));margin:0 auto}
+    .section{padding:90px 0}
+    .section-title{
+      font-size:clamp(2rem, 4vw, 3rem);
+      line-height:1.05;
+      margin:0 0 14px;
+      letter-spacing:-.03em;
+    }
+    .section-subtitle{
+      color:var(--muted);
+      max-width:700px;
+      margin:0 auto 24px 0;
+      font-size:1rem;
+      line-height:1.75;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.7rem;
+      padding:14px 22px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-weight:700;
+      transition:.3s ease;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      box-shadow:0 12px 30px rgba(124,92,255,.35);
+    }
+    .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05)}
+    .btn-outline{
+      border-color:var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      backdrop-filter:blur(12px);
+    }
+    .btn-outline:hover{
+      border-color:rgba(255,255,255,.25);
+      background:rgba(255,255,255,.08);
+      transform:translateY(-2px);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      font-size:.92rem;
+      font-weight:600;
+      backdrop-filter:blur(10px);
+    }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(16px);
+      background:rgba(10,12,27,.65);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      min-height:78px;
+      gap:1rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      font-weight:900;
+      letter-spacing:.04em;
+      font-size:1.1rem;
+    }
+    .brand-mark{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent),var(--primary));
+      box-shadow:0 10px 24px rgba(255,79,216,.25);
+    }
+    .brand-mark i{font-size:1rem;color:#fff}
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:1.2rem;
+    }
+    .nav-links a{
+      color:var(--muted);
+      font-weight:600;
+      font-size:.98rem;
+      transition:.25s ease;
+      position:relative;
+    }
+    .nav-links a:hover,
+    .nav-links a.active{color:#fff}
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;bottom:-8px;
+      width:0;height:2px;
+      border-radius:10px;
+      background:linear-gradient(90deg,var(--primary),var(--accent));
+      transition:.25s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after{width:100%}
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:.8rem;
+    }
+
+    .menu-toggle{
+      display:none;
+      width:46px;height:46px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      font-size:1.05rem;
+      cursor:pointer;
+    }
+
+    .hero{
+      position:relative;
+      padding:90px 0 70px;
+      overflow:hidden;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      align-items:center;
+      gap:2rem;
+    }
+    .hero-copy h1{
+      margin:18px 0 16px;
+      font-size:clamp(3rem, 7vw, 6rem);
+      line-height:.95;
+      letter-spacing:-.05em;
+    }
+    .hero-copy p{
+      color:var(--muted);
+      font-size:1.08rem;
+      line-height:1.8;
+      max-width:650px;
+      margin:0 0 30px;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+      margin-bottom:34px;
+    }
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1rem;
+      max-width:700px;
+    }
+    .stat{
+      padding:18px 18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+    }
+    .stat strong{
+      display:block;
+      font-size:1.55rem;
+      margin-bottom:6px;
+    }
+    .stat span{color:var(--muted);font-size:.95rem}
+
+    .hero-visual{
+      position:relative;
+      min-height:540px;
+    }
+    .hero-main-card{
+      position:absolute;
+      right:0;
+      top:20px;
+      width:min(100%, 480px);
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.1);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    }
+    .hero-main-card img{
+      height:540px;
+      width:100%;
+      object-fit:cover;
+      filter:saturate(1.1) contrast(1.05);
+    }
+    .floating-card{
+      position:absolute;
+      left:0;
+      bottom:30px;
+      width:240px;
+      padding:18px;
+      border-radius:24px;
+      background:rgba(15,16,33,.85);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(16px);
+      box-shadow:var(--shadow);
+      animation:float 5s ease-in-out infinite;
+    }
+    .floating-card .mini-title{
+      color:var(--gold);
+      font-size:.85rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-weight:800;
+    }
+    .floating-card h3{
+      margin:0 0 8px;
+      font-size:1.15rem;
+    }
+    .floating-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:.95rem;
+    }
+
+    .blur-orb{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(40px);
+      z-index:-1;
+      opacity:.7;
+    }
+    .orb-1{
+      width:180px;height:180px;
+      background:rgba(255,79,216,.26);
+      top:40px;right:70px;
+    }
+    .orb-2{
+      width:220px;height:220px;
+      background:rgba(0,209,255,.18);
+      bottom:30px;left:20px;
+    }
+
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:1.25rem;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:transform .35s ease, border-color .35s ease;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,255,255,.22);
+    }
+
+    .lineup-card img{
+      height:260px;
+      object-fit:cover;
+      width:100%;
+    }
+    .lineup-body{
+      padding:22px;
+    }
+    .eyebrow{
+      color:var(--accent);
+      font-size:.82rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+    .lineup-body h3{
+      margin:0 0 10px;
+      font-size:1.45rem;
+    }
+    .lineup-body p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.55rem;
+    }
+    .tag{
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#eee7ff;
+      font-size:.82rem;
+      font-weight:600;
+    }
+
+    .experience-wrap{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.5rem;
+      align-items:stretch;
+    }
+    .experience-media{
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      min-height:520px;
+      box-shadow:var(--shadow);
+    }
+    .experience-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .feature-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1rem;
+    }
+    .feature{
+      padding:22px;
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+    .feature-icon{
+      width:52px;height:52px;border-radius:16px;
+      display:grid;place-items:center;
+      margin-bottom:14px;
+      background:linear-gradient(135deg, rgba(255,79,216,.18), rgba(0,209,255,.18));
+      border:1px solid rgba(255,255,255,.1);
+      color:#fff;
+      font-size:1.15rem;
+    }
+    .feature h4{
+      margin:0 0 10px;
+      font-size:1.12rem;
+    }
+    .feature p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.95rem;
+    }
+
+    .tickets{
+      position:relative;
+    }
+    .ticket-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1.25rem;
+      margin-top:10px;
+    }
+    .ticket{
+      padding:28px;
+      border-radius:26px;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .ticket.popular{
+      transform:translateY(-6px);
+      border-color:rgba(255,184,77,.45);
+      box-shadow:0 26px 60px rgba(255,184,77,.12);
+    }
+    .popular-badge{
+      position:absolute;
+      top:16px;
+      right:16px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      background:linear-gradient(135deg,var(--gold),#ff7a4d);
+      color:#241400;
+    }
+    .ticket .plan{
+      font-size:.9rem;
+      color:var(--accent);
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+    .ticket .price{
+      font-size:3rem;
+      line-height:1;
+      margin-bottom:8px;
+      font-weight:900;
+      letter-spacing:-.04em;
+    }
+    .ticket .price span{
+      font-size:1rem;
+      color:var(--muted);
+      font-weight:600;
+      margin-left:6px;
+    }
+    .ticket p{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .ticket ul{
+      list-style:none;
+      padding:0;
+      margin:0 0 24px;
+      display:grid;
+      gap:.8rem;
+    }
+    .ticket li{
+      display:flex;
+      align-items:flex-start;
+      gap:.75rem;
+      color:#f1edff;
+      font-size:.96rem;
+    }
+    .ticket li i{
+      margin-top:4px;
+      color:var(--gold);
+    }
+
+    .info-bar{
+      margin-top:32px;
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:1rem;
+    }
+    .info-pill{
+      padding:18px 20px;
+      border-radius:20px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      gap:1rem;
+    }
+    .info-pill i{
+      width:46px;height:46px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--secondary),var(--primary));
+      flex:0 0 auto;
+    }
+    .info-pill strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:1rem;
+    }
+    .info-pill span{
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:1.25rem;
+    }
+    .gallery-left,
+    .gallery-right{
+      display:grid;
+      gap:1.25rem;
+    }
+    .gallery-left{
+      grid-template-columns:1fr 1fr;
+    }
+    .gallery-item{
+      position:relative;
+      overflow:hidden;
+      min-height:240px;
+      border-radius:24px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+    .gallery-item.large{
+      grid-column:span 2;
+      min-height:320px;
+    }
+    .gallery-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .6s ease;
+    }
+    .gallery-item:hover img{transform:scale(1.06)}
+    .gallery-overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding:18px;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.7));
+      color:#fff;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+
+    .footer{
+      padding:30px 0 50px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr .8fr;
+      gap:1.5rem;
+      align-items:start;
+    }
+    .footer p{
+      color:var(--muted);
+      line-height:1.7;
+      margin:.75rem 0 0;
+      max-width:540px;
+    }
+    .footer h4{
+      margin:0 0 14px;
+      font-size:1rem;
+    }
+    .footer-links{
+      display:grid;
+      gap:.8rem;
+    }
+    .footer-links a{
+      color:var(--muted);
+      transition:.25s ease;
+    }
+    .footer-links a:hover{color:#fff}
+    .socials{
+      display:flex;
+      gap:.8rem;
+      margin-top:1rem;
+    }
+    .socials a{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      transition:.25s ease;
+    }
+    .socials a:hover{
+      transform:translateY(-3px);
+      background:linear-gradient(135deg,var(--secondary),var(--primary));
+      border-color:transparent;
+    }
+    .footer-bottom{
+      margin-top:30px;
+      padding-top:22px;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(26px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-12px)}
+    }
+
+    @media (max-width: 1080px){
+      .hero-grid,
+      .experience-wrap,
+      .gallery,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+      .cards-grid,
+      .ticket-grid,
+      .info-bar{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .hero-visual{
+        min-height:500px;
+      }
+      .hero-main-card{
+        left:50%;
+        transform:translateX(-50%);
+      }
+      .floating-card{
+        left:30px;
+      }
+    }
+
+    @media (max-width: 820px){
+      .menu-toggle{display:grid;place-items:center}
+      .nav-links,
+      .nav-actions .desktop-only{
+        display:none;
+      }
+      .nav-menu{
+        position:fixed;
+        top:79px;
+        left:0;right:0;
+        background:rgba(9,11,24,.96);
+        backdrop-filter:blur(16px);
+        border-bottom:1px solid rgba(255,255,255,.08);
+        padding:1rem;
+        transform:translateY(-120%);
+        opacity:0;
+        pointer-events:none;
+        transition:.35s ease;
+      }
+      .nav-menu.open{
+        transform:translateY(0);
+        opacity:1;
+        pointer-events:auto;
+      }
+      .nav-menu .nav-links{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:1rem;
+        margin-bottom:1rem;
+      }
+      .nav-menu .nav-links a::after{bottom:-4px}
+      .nav-menu .mobile-ticket{
+        width:100%;
+      }
+
+      .hero{
+        padding-top:70px;
+      }
+      .hero-grid{
+        gap:2.5rem;
+      }
+      .hero-stats,
+      .feature-list,
+      .cards-grid,
+      .ticket-grid,
+      .info-bar,
+      .gallery-left{
+        grid-template-columns:1fr;
+      }
+      .hero-main-card img{
+        height:430px;
+      }
+      .hero-visual{
+        min-height:480px;
+      }
+      .floating-card{
+        width:220px;
+        left:12px;
+        bottom:10px;
+      }
+      .section{
+        padding:74px 0;
+      }
+    }
+
+    @media (max-width: 560px){
+      .container{width:min(var(--max), calc(100% - 1.2rem))}
+      .nav{min-height:72px}
+      .hero-copy h1{font-size:clamp(2.5rem, 13vw, 4rem)}
+      .hero-copy p{font-size:1rem}
+      .hero-actions{flex-direction:column;align-items:stretch}
+      .btn{width:100%}
+      .hero-main-card{
+        width:100%;
+      }
+      .hero-main-card img{
+        height:380px;
+      }
+      .floating-card{
+        position:relative;
+        left:auto;
+        bottom:auto;
+        width:100%;
+        margin-top:1rem;
+        animation:none;
+      }
+      .hero-visual{
+        min-height:auto;
+        display:flex;
+        flex-direction:column;
+        gap:1rem;
+      }
+      .info-pill{
+        align-items:flex-start;
+      }
+      .ticket .price{font-size:2.5rem}
+      .footer-bottom{
+        flex-direction:column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <span class="brand-mark"><i class="fa-solid fa-wave-square"></i></span>
+        <span>PULSEWAVE</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#home" class="active">Home</a>
+        <a href="#lineup">Lineup</a>
+        <a href="#experience">Experience</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#gallery">Gallery</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#tickets" class="btn btn-primary desktop-only">Buy Tickets</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-menu" id="mobileMenu">
+      <div class="container">
+        <nav class="nav-links" aria-label="Mobile navigation">
+          <a href="#home" class="active">Home</a>
+          <a href="#lineup">Lineup</a>
+          <a href="#experience">Experience</a>
+          <a href="#tickets">Tickets</a>
+          <a href="#gallery">Gallery</a>
+        </nav>
+        <a href="#tickets" class="btn btn-primary mobile-ticket">Buy Tickets</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="badge"><i class="fa-solid fa-music"></i> July 19–21 • Los Angeles, CA</span>
+          <h1>Where sound becomes a neon universe.</h1>
+          <p>
+            PulseWave Festival brings together chart-topping headliners, underground icons, immersive stage design, and unforgettable late-night energy for three electric days under the city lights.
+          </p>
+          <div class="hero-actions">
+            <a href="#tickets" class="btn btn-primary"><i class="fa-solid fa-ticket"></i> Get Festival Passes</a>
+            <a href="#lineup" class="btn btn-outline"><i class="fa-solid fa-play"></i> Explore Lineup</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>45+</strong>
+              <span>Artists across 3 dynamic stages</span>
+            </div>
+            <div class="stat">
+              <strong>30K</strong>
+              <span>Fans expected for the weekend</span>
+            </div>
+            <div class="stat">
+              <strong>72h</strong>
+              <span>Of nonstop performances & experiences</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="blur-orb orb-1"></div>
+          <div class="blur-orb orb-2"></div>
+          <div class="hero-main-card">
+            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=80" alt="Crowd enjoying a live music festival at night" />
+          </div>
+          <div class="floating-card">
+            <div class="mini-title">Headliner Spotlight</div>
+            <h3>Nova Vanta • Saturday 11:30 PM</h3>
+            <p>Expect a cinematic electronic set with laser visuals, surprise guests, and a finale built for the main stage.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lineup">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">Lineup highlights</h2>
+          <p class="section-subtitle">
+            From powerhouse pop and future bass to indie rock and midnight techno, this year’s roster is curated to keep every stage pulsing from golden hour to sunrise.
+          </p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card lineup-card reveal">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=900&q=80" alt="Female singer performing under festival lights" />
+            <div class="lineup-body">
+              <div class="eyebrow">Friday Headliner</div>
+              <h3>Luna Echo</h3>
+              <p>Dream-pop textures, massive hooks, and a visual set designed for the biggest opening night in festival history.</p>
+              <div class="tags">
+                <span class="tag">Dream Pop</span>
+                <span class="tag">Live Visuals</span>
+                <span class="tag">Main Stage</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card lineup-card reveal">
+            <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80" alt="DJ performing on stage with crowd" />
+            <div class="lineup-body">
+              <div class="eyebrow">Saturday Headliner</div>
+              <h3>Nova Vanta</h3>
+              <p>A genre-bending electronic architect known for explosive drops, live synths, and festival-closing energy.</p>
+              <div class="tags">
+                <span class="tag">Electronic</span>
+                <span class="tag">Synthwave</span>
+                <span class="tag">Peak Hour</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card lineup-card reveal">
+            <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=900&q=80" alt="Rock band playing in dramatic stage lighting" />
+            <div class="lineup-body">
+              <div class="eyebrow">Sunday Finale</div>
+              <h3>Crimson Avenue</h3>
+              <p>Anthemic alt-rock with stadium-sized choruses, raw guitars, and a closing set built to leave a mark.</p>
+              <div class="tags">
+                <span class="tag">Alt Rock</span>
+                <span class="tag">Live Band</span>
+                <span class="tag">Final Night</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="experience-wrap">
+          <div class="experience-media reveal">
+            <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1200&q=80" alt="Festival audience with lights and stage atmosphere" />
+          </div>
+
+          <div class="reveal">
+            <h2 class="section-title">A full-sensory festival experience</h2>
+            <p class="section-subtitle">
+              Beyond the music, PulseWave is built around immersive environments, elevated food concepts, creator installations, and VIP lounges that turn every corner into a memory.
+            </p>
+
+            <div class="feature-list">
+              <div class="feature">
+                <div class="feature-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                <h4>Immersive Stages</h4>
+                <p>Three visually distinct stages with synced lighting, projection mapping, and signature nighttime reveals.</p>
+              </div>
+              <div class="feature">
+                <div class="feature-icon"><i class="fa-solid fa-utensils"></i></div>
+                <h4>Food & Drinks</h4>
+                <p>Curated street food, dessert labs, and craft cocktail bars with fast-lane ordering for pass holders.</p>
+              </div>
+              <div class="feature">
+                <div class="feature-icon"><i class="fa-solid fa-star"></i></div>
+                <h4>VIP Sky Lounge</h4>
+                <p>Premium viewing decks, exclusive bars, shaded seating, and quick-entry access throughout the weekend.</p>
+              </div>
+              <div class="feature">
+                <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
+                <h4>Art Installations</h4>
+                <p>Interactive neon structures, creator-ready photo zones, and motion-reactive sculptures across the grounds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-bar reveal">
+          <div class="info-pill">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Venue</strong>
+              <span>Skyline Park, Los Angeles</span>
+            </div>
+          </div>
+          <div class="info-pill">
+            <i class="fa-solid fa-calendar-days"></i>
+            <div>
+              <strong>Dates</strong>
+              <span>July 19–21, 2025</span>
+            </div>
+          </div>
+          <div class="info-pill">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <strong>Doors Open</strong>
+              <span>3:00 PM daily</span>
+            </div>
+          </div>
+          <div class="info-pill">
+            <i class="fa-solid fa-bolt"></i>
+            <div>
+              <strong>After Hours</strong>
+              <span>Exclusive midnight sessions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tickets" id="tickets">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">Choose your pass</h2>
+          <p class="section-subtitle">
+            Lock in your weekend now. All passes include access to performances, art zones, and festival installations. Quantities are limited and pricing increases as tiers sell out.
+          </p>
+        </div>
+
+        <div class="ticket-grid">
+          <article class="ticket reveal">
+            <div class="plan">General Admission</div>
+            <div class="price">$129<span>/ day</span></div>
+            <p>Perfect for fans who want full access to the festival grounds, live sets, and public experiences.</p>
+            <ul>
+              <li><i class="fa-solid fa-check"></i><span>Entry to all standard stages</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Food court & art district access</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Cashless wristband activation</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Official festival app schedule</span></li>
+            </ul>
+            <a href="#" class="btn btn-outline">Select GA</a>
+          </article>
+
+          <article class="ticket popular reveal">
+            <span class="popular-badge">Most Popular</span>
+            <div class="plan">Weekend Pass</div>
+            <div class="price">$299<span>/ 3 days</span></div>
+            <p>The best value for the full PulseWave journey with all three days of music, energy, and late-night moments.</p>
+            <ul>
+              <li><i class="fa-solid fa-check"></i><span>3-day festival entry</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Priority security lane</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Exclusive merch pre-order access</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Discounted after-hours add-ons</span></li>
+            </ul>
+            <a href="#" class="btn btn-primary">Select Weekend</a>
+          </article>
+
+          <article class="ticket reveal">
+            <div class="plan">VIP Experience</div>
+            <div class="price">$549<span>/ 3 days</span></div>
+            <p>Upgrade your festival with premium views, luxury lounges, and exclusive comfort throughout the event.</p>
+            <ul>
+              <li><i class="fa-solid fa-check"></i><span>Everything in Weekend Pass</span></li>
+              <li><i class="fa-solid fa-check"></i><span>VIP Sky Lounge access</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Dedicated bars & rest areas</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Fast-track entry and VIP amenities</span></li>
+            </ul>
+            <a href="#" class="btn btn-outline">Select VIP</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">Festival atmosphere</h2>
+          <p class="section-subtitle">
+            Sneak a look at the world of PulseWave: vivid lights, huge crowds, rooftop vibes, and the kind of night you never want to end.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <div class="gallery-left">
+            <div class="gallery-item large reveal">
+              <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=80" alt="Large festival crowd with stage and lights" />
+              <div class="gallery-overlay">Main Stage Energy</div>
+            </div>
+            <div class="gallery-item reveal">
+              <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=900&q=80" alt="DJ set in colorful lighting" />
+              <div class="gallery-overlay">Late Night Sets</div>
+            </div>
+            <div class="gallery-item reveal">
+              <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&w=900&q=80" alt="People dancing with stage lights" />
+              <div class="gallery-overlay">Golden Hour Crowd</div>
+            </div>
+          </div>
+
+          <div class="gallery-right">
+            <div class="gallery-item reveal">
+              <img src="https://images.unsplash.com/photo-1499364615650-ec38552f4f34?auto=format&fit=crop&w=900&q=80" alt="Festival lights and crowd hands in the air" />
+              <div class="gallery-overlay">Electric Moments</div>
+            </div>
+            <div class="gallery-item reveal">
+              <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80" alt="Concert audience under dramatic red and purple lighting" />
+              <div class="gallery-overlay">Midnight Finale</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#home" class="brand">
+            <span class="brand-mark"><i class="fa-solid fa-wave-square"></i></span>
+            <span>PULSEWAVE</span>
+          </a>
+          <p>
+            PulseWave Festival is the official home for lineup reveals, ticket drops, venue details, and festival updates. Join us for a weekend of sound, light, and unforgettable live moments.
+          </p>
+          <div class="socials">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Festival</h4>
+          <div class="footer-links">
+            <a href="#lineup">Artist Lineup</a>
+            <a href="#experience">Venue Experience</a>
+            <a href="#tickets">Ticket Options</a>
+            <a href="#gallery">Gallery</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Contact</h4>
+          <div class="footer-links">
+            <a href="mailto:hello@pulsewavefest.com">hello@pulsewavefest.com</a>
+            <a href="tel:+10000000000">+1 (000) 000-0000</a>
+            <a href="#">Travel & Stay Guide</a>
+            <a href="#">FAQ & Festival Policies</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2025 PulseWave Festival. All rights reserved.</span>
+        <span>Made for the music, the lights, and the crowd.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const reveals = document.querySelectorAll('.reveal');
+    const sections = document.querySelectorAll('main section[id]');
+
+    menuToggle.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      document.body.classList.toggle('menu-open', open);
+      menuToggle.setAttribute('aria-expanded', open);
+      menuToggle.innerHTML = open
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.14 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    const setActiveNav = () => {
+      let current = 'home';
+      sections.forEach(section => {
+        const top = window.scrollY;
+        const offset = section.offsetTop - 140;
+        const height = section.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
+    };
+
+    window.addEventListener('scroll', setActiveNav);
+    window.addEventListener('load', setActiveNav);
+  </script>
+</body>
+</html>
